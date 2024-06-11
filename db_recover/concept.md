@@ -10,7 +10,7 @@ _ACID_ stands for:
 - Durability
 
 <details title='About ACID'>
-
+<summary>About this concept</summary>
 **Atomic**: All operations in one transaction should be all done or all rollbacked.
 
 **Consistency**: Since all transaction is all successful or all rollback, so if a database is consistent before transaction, it must be consistent after this transaction too.

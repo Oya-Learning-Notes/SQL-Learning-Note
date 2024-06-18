@@ -18,6 +18,10 @@ About the basic of foreign key in MySQL.
 
 [Relation Paradigm](./paradigm/readme.md)
 
-[Transaction](./db_recover/concept.md)
+Introduce relation model paradigm like `2NF`, `BCNF` etc.
 
-[Error Handling](./db_recover/recover.md)
+[Transaction & Database Recover](./db_recover/readme.md)
+
+[Concurrency Control](./concurrency.md)
+
+Introduce Concurrency Control, Lock, Streamable Sequence etc.

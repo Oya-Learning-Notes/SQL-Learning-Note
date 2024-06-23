@@ -1,9 +1,9 @@
 # Issues In Concurrency
 
-- __Lost Update.__ Two _Transactions_ read a same data `X`, and update `X` respectively. The data of former update will be covered by latter one, thus lost.
-- __Dirty Read.__ Read a pre-write data that has been rollbacked later.
+- __Lost Update. (丢失修改)__ Two _Transactions_ read a same data `X`, and update `X` respectively. The data of former update will be covered by latter one, thus lost.
+- __Dirty Read. (脏读)__ Read a pre-write data that has been rollbacked later.
 - __Outdated Read. (不可重复读)__ Read a value that has been updated later.
-- __Phantom.__ Read rows with condition, which's result will change because of later insertion or deletion.
+- __Phantom. (幻读)__ Read rows with condition, which's result will change because of later insertion or deletion.
 
 > Textbook P335.
 
@@ -16,9 +16,9 @@
 
 ## Locks Levels
 
-- 读未提交
-- 读已提交
-- 可重复读
+- 读未提交 _Solve: Lost Update._
+- 读已提交 _Solve: Lost Update, Dirty Read._
+- 可重复读 _Solve: Lost Update, Dirty Read, Outdated Read._
 - 可串行化
 
 |                    | Update Lost | Dirty Read | Read Outdated | Phantom |
@@ -53,6 +53,16 @@ _Level-3 Lock Protocal_.
 - `SLOCK` when read, until _Transaction End_.
 
 > Notice: Only difference of this level and level-2 is when to release `S` lock.
+
+## Conclusion
+
+| Level               | SLock Apply    | SLock Release         | XLock Apply     | XLock Release         |
+| ------------------- | -------------- | --------------------- | --------------- | --------------------- |
+| L1: Read Non-submit |                |                       | **Write begin** | **Submit / Rollback** |
+| L2: Read Submit     | **Read begin** | **Read end**          | Write begin     | Submit / Rollback     |
+| L3: Duplicated Read | Read begin     | **Submit / Rollback** | Write begin     | Submit / Rollback     |
+
+> **Bold text** means the **apply/release rule of this section has changed** in this level **compared to previous one**.
 
 # 冲突可串行操作
 
